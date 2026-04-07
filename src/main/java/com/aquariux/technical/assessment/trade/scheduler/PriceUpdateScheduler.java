@@ -126,8 +126,8 @@ public class PriceUpdateScheduler {
         if (cryptoPairId != null) {
             CryptoPrice cryptoPrice = new CryptoPrice();
             cryptoPrice.setCryptoPairId(cryptoPairId);
-            cryptoPrice.setBidPrice(askPrice);
-            cryptoPrice.setAskPrice(bidPrice);
+            cryptoPrice.setBidPrice(bidPrice);
+            cryptoPrice.setAskPrice(askPrice);
             cryptoPrice.setBidSource(askSource);
             cryptoPrice.setAskSource(bidSource);
             

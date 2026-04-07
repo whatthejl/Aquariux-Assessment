@@ -10,4 +10,8 @@ public class CryptoPair {
     private Long quoteSymbolId;
     private String pairName;
     private Boolean active;
+
+    // joined/read-only helper fields
+    private String baseSymbol;
+    private String quoteSymbol;
 }
