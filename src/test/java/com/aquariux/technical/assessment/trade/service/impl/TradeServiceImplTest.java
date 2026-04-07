@@ -7,7 +7,6 @@ import com.aquariux.technical.assessment.trade.entity.CryptoPrice;
 import com.aquariux.technical.assessment.trade.entity.Trade;
 import com.aquariux.technical.assessment.trade.entity.UserWallet;
 import com.aquariux.technical.assessment.trade.enums.TradeType;
-import com.aquariux.technical.assessment.trade.exception.BadRequestException;
 import com.aquariux.technical.assessment.trade.exception.InsufficientBalanceException;
 import com.aquariux.technical.assessment.trade.exception.ResourceNotFoundException;
 import com.aquariux.technical.assessment.trade.mapper.CryptoPairMapper;
@@ -453,23 +452,5 @@ class TradeServiceImplTest {
         assertThatThrownBy(() -> tradeService.executeTrade(buyRequest))
                 .isInstanceOf(InsufficientBalanceException.class)
                 .hasMessageContaining("Insufficient balance");
-    }
-
-    @Test
-    void executeTrade_shouldThrowWhenQuantityIsZero() {
-        buyRequest.setQuantity(BigDecimal.ZERO);
-
-        assertThatThrownBy(() -> tradeService.executeTrade(buyRequest))
-                .isInstanceOf(BadRequestException.class)
-                .hasMessageContaining("quantity must be greater than zero");
-    }
-
-    @Test
-    void executeTrade_shouldThrowWhenPairNameIsBlank() {
-        buyRequest.setPairName(" ");
-
-        assertThatThrownBy(() -> tradeService.executeTrade(buyRequest))
-                .isInstanceOf(BadRequestException.class)
-                .hasMessageContaining("pairName is required");
     }
 }

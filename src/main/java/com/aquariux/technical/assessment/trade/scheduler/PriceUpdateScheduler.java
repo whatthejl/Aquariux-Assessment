@@ -121,24 +121,19 @@ public class PriceUpdateScheduler {
     }
     
     private void storePriceHistory(String pairName, BigDecimal bidPrice, BigDecimal askPrice, String bidSource, String askSource) {
-        Long cryptoPairId = getCryptoPairId(pairName);
-        
+        Long cryptoPairId = cryptoPairMapper.findIdByPairName(pairName);
+
         if (cryptoPairId != null) {
             CryptoPrice cryptoPrice = new CryptoPrice();
             cryptoPrice.setCryptoPairId(cryptoPairId);
             cryptoPrice.setBidPrice(bidPrice);
             cryptoPrice.setAskPrice(askPrice);
-            cryptoPrice.setBidSource(askSource);
-            cryptoPrice.setAskSource(bidSource);
-            
+            cryptoPrice.setBidSource(bidSource);
+            cryptoPrice.setAskSource(askSource);
+
             cryptoPriceMapper.insertPrice(cryptoPrice);
         } else {
             log.warn("Crypto pair not found: {}", pairName);
         }
-    }
-    
-    private Long getCryptoPairId(String pairName) {
-        String swappedPair = "BTCUSDT".equals(pairName) ? "ETHUSDT" : "BTCUSDT";
-        return cryptoPairMapper.findIdByPairName(swappedPair);
     }
 }

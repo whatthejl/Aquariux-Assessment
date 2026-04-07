@@ -1,6 +1,5 @@
 package com.aquariux.technical.assessment.trade.service.impl;
 
-import com.aquariux.technical.assessment.trade.dto.internal.UserWalletDto;
 import com.aquariux.technical.assessment.trade.dto.request.TradeRequest;
 import com.aquariux.technical.assessment.trade.dto.response.TradeResponse;
 import com.aquariux.technical.assessment.trade.entity.CryptoPair;
@@ -43,7 +42,7 @@ public class TradeServiceImpl implements TradeServiceInterface {
         // TODO: Implement the core trading engine
         // What should happen when a user executes a trade?
 
-        validateRequest(tradeRequest);
+//        validateRequest(tradeRequest);
 
         // Check User
         Long userId = tradeRequest.getUserId();
@@ -149,27 +148,6 @@ public class TradeServiceImpl implements TradeServiceInterface {
         response.setTradeTime(tradeTime);
         response.setStatus("SUCCESS");
         return response;
-    }
-
-    private void validateRequest(TradeRequest tradeRequest) {
-        if (tradeRequest == null) {
-            throw new BadRequestException("Trade request must not be null");
-        }
-        if (tradeRequest.getUserId() == null) {
-            throw new BadRequestException("userId is required");
-        }
-        if (tradeRequest.getTradeType() == null) {
-            throw new BadRequestException("tradeType is required");
-        }
-        if (tradeRequest.getPairName() == null || tradeRequest.getPairName().isBlank()) {
-            throw new BadRequestException("pairName is required");
-        }
-        if (tradeRequest.getQuantity() == null) {
-            throw new BadRequestException("quantity is required");
-        }
-        if (tradeRequest.getQuantity().compareTo(BigDecimal.ZERO) <= 0) {
-            throw new BadRequestException("quantity must be greater than zero");
-        }
     }
 
     private BigDecimal scale(BigDecimal value) {

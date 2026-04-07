@@ -5,6 +5,7 @@ import com.aquariux.technical.assessment.trade.dto.response.TradeResponse;
 import com.aquariux.technical.assessment.trade.service.TradeServiceInterface;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +24,7 @@ public class TradeController {
 
     @PostMapping(value = "/execute", produces = "application/json")
     @Operation(summary = "Execute trade", description = "Execute a buy or sell trade for cryptocurrency pairs")
-    public ResponseEntity<TradeResponse> executeTrade(@RequestBody TradeRequest tradeRequest) {
+    public ResponseEntity<TradeResponse> executeTrade(@Valid @RequestBody TradeRequest tradeRequest) {
         // TODO: How should a trading API endpoint behave?
         return ResponseEntity.ok(tradeService.executeTrade(tradeRequest));
     }
